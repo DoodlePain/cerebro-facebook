@@ -13,6 +13,7 @@ class Preview extends Component {
   render() {
     let list = []
     Object.keys(this.props.person).map((result, index) => {
+      console.log(this.props.person[result].img);
       list = [
         ...list,
 

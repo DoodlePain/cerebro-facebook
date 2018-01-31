@@ -29,22 +29,28 @@ export const fn = ({term, display, actions}) => {
     } else {
       sterm = term.slice(8)
     }
+    console.log(sterm);
     if (sterm.match(token)) {
       sterm = sterm.slice(6)
       FB.setAccessToken(sterm);
       localStorage.setItem("accessToken", sterm)
+      console.log(localStorage.getItem("accessToken"));
+      console.log(sterm);
     } else {
       FB.api('search', {
         q: sterm,
         type: 'user'
       }, function(res) {
+        console.log(res);
         if (!res || res.error) {
-          // console.log(
-          //   !res
-          //   ? 'error occurred'
-          //   : res.error);
+          console.log(
+            !res
+            ? 'error occurred'
+            : res.error);
           return;
         }
+        console.log(res.data[0].id);
+        console.log(res.data[0].name);
         uri = 'https://facebook.com/' + res.data[0].id
         for (var i = 0; i < 8; i++) {
 
@@ -71,7 +77,7 @@ export const fn = ({term, display, actions}) => {
         display({
           icon,
           title: "You have to set the access token first, type 'f token YOUR_ACCESS_TOKEN'",
-          subtitle:"Click to get your access token",
+          subtitle:"Get your token ",
           onSelect: () => search('https://developers.facebook.com/tools/explorer')
         });
       }
