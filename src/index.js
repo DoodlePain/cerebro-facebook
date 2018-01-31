@@ -66,12 +66,20 @@ export const fn = ({term, display, actions}) => {
         }
       });
       response = 'Results for ' + sterm
-      display({
-        icon,
-        title: response,
-        subtitle: 'test',
-        getPreview: () => <Preview person={list}/>
-      });
+      if (localStorage.getItem("accessToken") !== null) {
+        display({
+          icon,
+          title: response,
+          getPreview: () => <Preview person={list}/>
+        });
+      }else{
+        display({
+          icon,
+          title: "You have to set the access token first, type 'f token YOUR_ACCESS_TOKEN'",
+          subtitle:"Click to get your access token",
+          onSelect: () => search('https://developers.facebook.com/tools/explorer')
+        });
+      }
 
     }
 
