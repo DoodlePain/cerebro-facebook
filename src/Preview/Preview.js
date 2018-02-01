@@ -13,15 +13,20 @@ class Preview extends Component {
   render() {
     let list = []
     Object.keys(this.props.person).map((result, index) => {
-      console.log(this.props.person[result].img);
       list = [
         ...list,
 
         <KeyboardNavItem><Item content={this.props.person[result]} key={index}/></KeyboardNavItem>
       ]
     })
+
+    const style = {
+      'list-style-type': 'none',
+      'height':'360px',
+      'width':'400px'
+    }
     return (<KeyboardNav>
-      <ul>
+      <ul style={style}>
         {list}
       </ul>
     </KeyboardNav>)
